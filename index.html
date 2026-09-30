@@ -394,7 +394,7 @@
 
         <div class="map-shell">
           <div id="map" class="map-instance"></div>
-          <div class="map-caption">Base topográfica: OpenTopoMap · Coordenadas aproximadas basadas en literatura geológica (Redwood, 2020) y fuentes públicas — no sustituyen la Carta Geológica Oficial ni los mapas de concesión del MICI/DNRM.</div>
+          <div class="map-caption">Base topográfica: OpenTopoMap · Datos de estado revisados al 22/09/2026. Coordenadas aproximadas; para concesiones prevalecen los registros del MICI/DNRM. La presencia de un recurso o concesión no implica explotación activa.</div>
         </div>
       </div>
     </div>
@@ -623,40 +623,134 @@
       zeolita:     { label: "Zeolitas (prospecto)",      color: "#6b8f71", icon: "🪨" }
     };
 
+    /*
+     * DATOS DEL MAPA MINERALÓGICO — VERIFICADOS AL 22/09/2026
+     *
+     * "Mineral confirmado" no significa "mina actualmente en producción".
+     * El campo status distingue producción, preservación, preproducción,
+     * cierre histórico, exploración/prospección y concesiones no metálicas.
+     */
     const SITES = [
-      { name: "Mina Cobre Panamá (Petaquilla)", loc: "Donoso, Colón", lat: 8.815, lng: -80.708,
-        minerals: ["cobre","oro","plata","moly"], isProspecto: false,
-        body: "El yacimiento de cobre más grande de Centroamérica. Cuenta con una Planta de Recuperación por Gravimetría que produce una \"Barra Doré\" (75–90% plata, 5–15% oro) como coproducto confirmado, además de molibdeno (ley ~0.006%). En fase de preservación desde noviembre de 2023." },
-      { name: "Cerro Colorado", loc: "Comarca Ngäbe-Buglé / Chiriquí", lat: 8.592, lng: -81.791,
-        minerals: ["cobre"], isProspecto: false,
-        body: "Uno de los depósitos de cobre pórfido más grandes del mundo, conocido desde 1932. Sin desarrollo minero activo." },
-      { name: "Franja Aurífera de Veraguas", loc: "Santa Fe – Cañazas, Veraguas", lat: 8.55, lng: -81.05,
-        minerals: ["oro","cobre"], isProspecto: false,
-        body: "Cinturón con mineralización confirmada tanto de oro como de cobre (Redwood, 2020), hospedado en rocas volcánicas calcoalcalinas del Mioceno medio." },
-      { name: "Cinturón de Azuero", loc: "Península de Azuero", lat: 7.65, lng: -80.55,
-        minerals: ["oro","cobre","plata"], isProspecto: false,
-        body: "Mineralización de tipo exhalativo-sedimentario confirmada, con oro, cobre y plata documentados en la literatura geológica, además de placeres de oro en terrazas fluviales cercanas." },
-      { name: "Molejón / Santa Rosa", loc: "Donoso, Colón", lat: 8.95, lng: -80.62,
-        minerals: ["oro"], isProspecto: false,
-        body: "Antiguo distrito aurífero en el corredor de Colón, con explotación confirmada e intermitente durante el siglo XX." },
-      { name: "Yacimiento Aurífero Remance", loc: "Santa Fe, Veraguas", lat: 8.215, lng: -80.822,
-        minerals: ["oro"], isProspecto: false,
-        body: "Mina histórica de oro explotada de forma intermitente por más de cien años; el periodo más reciente fue entre 1989 y 1999." },
-      { name: "Cerro Quema", loc: "Tonosí, Los Santos", lat: 7.55, lng: -80.43,
-        minerals: ["oro","plata"], isProspecto: false,
-        body: "Proyecto en proceso confirmado de extracción de oro y plata en la península de Azuero." },
-      { name: "Cantera Veracruz", loc: "Arraiján, Panamá Oeste", lat: 8.93, lng: -79.66,
-        minerals: ["no_metalico"], isProspecto: false,
-        body: "Concesión de extracción de piedra de cantera confirmada por el Ministerio de Comercio e Industrias (MICI)." },
-      { name: "Cantera Chilibre", loc: "Chilibre, Panamá", lat: 9.13, lng: -79.62,
-        minerals: ["no_metalico"], isProspecto: false,
-        body: "Concesión para extracción de arena, piedra, caliza y arcilla, registrada ante el MICI." },
-      { name: "Cantera Bágala", loc: "Boquerón, Chiriquí", lat: 8.48, lng: -82.43,
-        minerals: ["no_metalico"], isProspecto: false,
-        body: "Extracción confirmada de grava continental, registrada ante el MICI. Confirma que la explotación de no metálicos no se limita a Panamá Oeste, sino que ocurre también en Chiriquí y en la provincia de Panamá." },
-      { name: "Zeolitas de Chiriquí", loc: "Chiriquí", lat: 8.43, lng: -82.43,
-        minerals: ["zeolita"], isProspecto: true,
-        body: "Prospecto de mineral no metálico en fase de estudio (UTP / SENACYT). Existen indicios de zeolitas naturales, pero sin yacimiento de alta pureza confirmado ni desarrollo comercial." }
+      {
+        name: "Cobre Panamá",
+        loc: "Donoso, Colón",
+        lat: 8.815, lng: -80.708,
+        minerals: ["cobre","oro","plata","moly"],
+        isProspecto: false,
+        status: "PRESERVACIÓN / SIN EXTRACCIÓN",
+        statusType: "preservacion",
+        body: "Gran yacimiento de cobre de Panamá, con oro, plata y molibdeno asociados. La extracción permanece detenida desde noviembre de 2023. En 2026 el proyecto continúa bajo un Plan de Preservación y Gestión Segura (cuido y mantenimiento); las autorizaciones específicas de 2026 no constituyen un reinicio general de la operación minera."
+      },
+      {
+        name: "Cerro Colorado",
+        loc: "Comarca Ngäbe-Buglé",
+        lat: 8.500, lng: -81.783,
+        minerals: ["cobre"],
+        isProspecto: false,
+        status: "SIN EXPLOTACIÓN MINERA",
+        statusType: "sin-explotacion",
+        body: "Importante depósito de cobre porfídico conocido desde 1932. No existe una mina de cobre en producción en este sitio. En septiembre de 2026 el ministro de Ambiente declaró que no existen planes gubernamentales para desarrollar una mina allí."
+      },
+      {
+        name: "Franja Aurífera de Veraguas",
+        loc: "Santa Fe – Cañazas, Veraguas",
+        lat: 8.550, lng: -81.050,
+        minerals: ["oro","cobre"],
+        isProspecto: true,
+        status: "ZONA GEOLÓGICA / PROSPECTIVA",
+        statusType: "prospecto",
+        body: "No es una mina individual, sino una franja geológica con mineralización de oro y cobre documentada. Debe interpretarse como zona de potencial y exploración, no como una operación minera activa."
+      },
+      {
+        name: "Cinturón de Azuero",
+        loc: "Península de Azuero",
+        lat: 7.650, lng: -80.550,
+        minerals: ["oro","cobre","plata"],
+        isProspecto: true,
+        status: "ZONA GEOLÓGICA / PROSPECTIVA",
+        statusType: "prospecto",
+        body: "No es una mina individual. Es una zona geológica donde se ha documentado mineralización de oro, cobre y plata. El punto del mapa representa el cinturón mineralizado y no una explotación actualmente operativa."
+      },
+      {
+        name: "Molejón (Petaquilla Gold)",
+        loc: "Donoso, Colón",
+        lat: 8.800, lng: -80.646,
+        minerals: ["oro","plata"],
+        isProspecto: false,
+        status: "CERRADA / SIN EXPLOTACIÓN",
+        statusType: "cerrada",
+        body: "Mina histórica de oro y plata del proyecto Petaquilla/Molejón. La operación de Petaquilla Gold cesó en 2014 y no debe presentarse como mina actualmente activa."
+      },
+      {
+        name: "Mina Santa Rosa",
+        loc: "Cañazas, Veraguas",
+        lat: 8.307, lng: -81.208,
+        minerals: ["oro","plata"],
+        isProspecto: false,
+        status: "PREPRODUCCIÓN / PREPARACIÓN DEL SITIO",
+        statusType: "preproduccion",
+        body: "Proyecto de oro y plata bajo Contrato Ley No. 92. Actualmente no está en producción; la empresa reporta preparación del sitio y obras iniciales en 2026, con puesta en marcha de la Fase I prevista para marzo de 2027."
+      },
+      {
+        name: "Mina Remance",
+        loc: "San Francisco, Veraguas",
+        lat: 8.298, lng: -81.075,
+        minerals: ["oro"],
+        isProspecto: false,
+        status: "CERRADA / SIN EXPLOTACIÓN",
+        statusType: "cerrada",
+        body: "Mina histórica de oro explotada de manera intermitente durante más de un siglo. La última explotación documentada fue entre 1989 y 1999 por Minera Remance S.A. Actualmente no está en explotación."
+      },
+      {
+        name: "Cerro Quema",
+        loc: "Tonosí, Los Santos",
+        lat: 7.561, lng: -80.515,
+        minerals: ["oro","plata"],
+        isProspecto: false,
+        status: "CONCESIÓN CANCELADA / SIN EXPLOTACIÓN",
+        statusType: "cancelada",
+        body: "Proyecto de oro y plata. Los contratos de extracción de Minera Cerro Quema, S.A. aparecen cancelados mediante resoluciones de noviembre de 2023 en el listado del MICI actualizado a abril de 2026. Por tanto, no debe mostrarse como mina actualmente operativa."
+      },
+      {
+        name: "Minequip Corp. – Chilibre",
+        loc: "Chilibre, Panamá",
+        lat: 9.185, lng: -79.583,
+        minerals: ["no_metalico"],
+        isProspecto: false,
+        status: "CONCESIÓN VIGENTE",
+        statusType: "concesion",
+        body: "Concesión de extracción de piedra de cantera registrada por el MICI. El listado oficial actualizado a mayo de 2026 registra contratos de Minequip Corp. en Chilibre con vencimiento en 2035. Una concesión vigente no demuestra por sí sola que exista extracción diaria en curso."
+      },
+      {
+        name: "Minequip Corp. – Playa Leona",
+        loc: "La Chorrera, Panamá Oeste",
+        lat: 8.870, lng: -79.820,
+        minerals: ["no_metalico"],
+        isProspecto: false,
+        status: "CONCESIÓN VIGENTE",
+        statusType: "concesion",
+        body: "Concesión de extracción de piedra de cantera registrada por el MICI. El contrato aparece en el listado oficial actualizado a mayo de 2026 y tiene vigencia hasta 2044. Se identifica como concesión, no como prueba de actividad extractiva diaria."
+      },
+      {
+        name: "Cantera Safco",
+        loc: "Chilibre, Panamá",
+        lat: 9.145, lng: -79.560,
+        minerals: ["no_metalico"],
+        isProspecto: false,
+        status: "ACTIVIDAD COMERCIAL REGISTRADA",
+        statusType: "activa",
+        body: "Aviso de Operación vigente para trituración de roca basáltica y extracción de material pétreo para la industria de la construcción, ubicado en Chilibre. Es un ejemplo de actividad comercial no metálica registrada; no debe confundirse con una mina metálica."
+      },
+      {
+        name: "Zeolitas de Chiriquí",
+        loc: "Chiriquí",
+        lat: 8.430, lng: -82.430,
+        minerals: ["zeolita"],
+        isProspecto: true,
+        status: "PROSPECTO / SIN DESARROLLO COMERCIAL CONFIRMADO",
+        statusType: "prospecto",
+        body: "Indicios de zeolitas naturales estudiados en Chiriquí. No se presenta como una mina en producción ni como un yacimiento comercial plenamente confirmado."
+      }
     ];
 
     const activeCategories = new Set(); // inactivos por defecto
@@ -710,9 +804,18 @@
       SITES.forEach(site => {
         const visibleMinerals = site.minerals.filter(m => activeCategories.has(m));
         if (visibleMinerals.length === 0) return;
-        const statusTag = site.isProspecto
-          ? `<span style="display:inline-block;font-size:11px;padding:2px 8px;border-radius:4px;margin:0 4px 4px 0;background:#6b8f7122;color:#6b8f71;border:1px dashed #6b8f71">PROSPECTO</span>`
-          : `<span style="display:inline-block;font-size:11px;padding:2px 8px;border-radius:4px;margin:0 4px 4px 0;background:#22c55e22;color:#16a34a;border:1px solid #16a34a55">CONFIRMADO</span>`;
+        const statusStyles = {
+          preservacion: { bg: "#f59e0b22", color: "#b45309", border: "#b4530966", style: "solid" },
+          "sin-explotacion": { bg: "#64748b22", color: "#475569", border: "#47556966", style: "solid" },
+          prospecto: { bg: "#6b8f7122", color: "#6b8f71", border: "#6b8f71", style: "dashed" },
+          cerrada: { bg: "#ef444422", color: "#b91c1c", border: "#b91c1c66", style: "solid" },
+          preproduccion: { bg: "#3b82f622", color: "#1d4ed8", border: "#1d4ed866", style: "solid" },
+          cancelada: { bg: "#ef444422", color: "#b91c1c", border: "#b91c1c66", style: "solid" },
+          concesion: { bg: "#a89b8022", color: "#57534e", border: "#57534e66", style: "solid" },
+          activa: { bg: "#22c55e22", color: "#15803d", border: "#15803d66", style: "solid" }
+        };
+        const st = statusStyles[site.statusType] || statusStyles.prospecto;
+        const statusTag = `<span style="display:inline-block;font-size:11px;padding:2px 8px;border-radius:4px;margin:0 4px 4px 0;background:${st.bg};color:${st.color};border:1px ${st.style} ${st.border}">${site.status}</span>`;
         const catTags = visibleMinerals.map(m =>
           `<span style="display:inline-block;font-size:11px;padding:2px 8px;border-radius:4px;margin:0 4px 4px 0;background:${CATEGORIES[m].color}22;color:${CATEGORIES[m].color};border:1px solid ${CATEGORIES[m].color}55">${CATEGORIES[m].label}</span>`
         ).join('');
